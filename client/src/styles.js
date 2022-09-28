@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
+import blue from "@material-ui/core/colors/blue";
 
 export default makeStyles(() => ({
   appBar: {
@@ -8,9 +9,10 @@ export default makeStyles(() => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#1C538E'
   },
   heading: {
-    color: 'rgba(0,183,255, 1)',
+    color: 'rgba(255,255,255, 1)',
     display: 'inline-block',
   },
   image: {

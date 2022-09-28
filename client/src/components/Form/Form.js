@@ -23,7 +23,7 @@ const Form = ()=> {
 
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} variant="outlined" >
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit} /* have multiple format */>
         <Typography variant="h6">Creating a Memory</Typography>
         <TextField 
