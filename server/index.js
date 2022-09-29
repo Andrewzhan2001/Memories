@@ -14,7 +14,9 @@ app.use(bodyParser.json({limit: "30mb", extended: true}))  // limit setting the 
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true})) // for URL-encoded requests, extended: true precises that the req.body object will contain values of any type instead of just strings.
 app.use(cors())
 app.use('/posts', postRoutes)
-
+app.get('/', (req, res) => { 
+  res.send('Welcome to Memories')
+})
 const PORT = process.env.PORT || 5000
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
