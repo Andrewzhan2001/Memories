@@ -4,28 +4,38 @@ import useStyles from './styles';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPosts, updatePost } from '../../actions/posts';
-const handleSubmit = () => {
 
-};
 
-const Form = ()=> {
+const Form = ({currentId, setCurrentId})=> {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   const classes = useStyles();
   const dispatch = useDispatch();
+  const post = useSelector((state)=> currentId ? state.posts.find((post)=> post._id === currentId) : null);
   const clear = () => {
+    setCurrentId(null);
     setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   };
 
+  useEffect(() => {
+    if(post) setPostData(post);
+  }, [post]); // when post changes(from null to post which we find it), we want to call this function
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // do not get refresh in the browser
-    dispatch(createPosts(postData));
+    if(currentId){
+      dispatch(updatePost(currentId, postData));
+    }else {
+      dispatch(createPosts(postData));
+    }
+    clear();
   };
 
 
   return (
     <Paper className={classes.paper} variant="outlined" >
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit} /* have multiple format */>
-        <Typography variant="h6">Creating a Memory</Typography>
+        <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
         <TextField 
           name="creator" 
           variant="outlined" 

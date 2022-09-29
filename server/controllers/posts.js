@@ -1,5 +1,7 @@
 // put all the handlers for our routes
 import PostMessage from "../models/postMessage.js";
+import express from 'express';
+import mongoose from 'mongoose';
 
 //asynchronous means program will not wait the funtion finish to do the next step
 //funciton will do the rest until wait is done
@@ -23,4 +25,17 @@ export const createPost = async (req,res)=>{  // request and response
   } catch (error) {
     res.status(409).json({message: error.message});
   }
+}
+
+export const updatePost = async (req, res) => {// request and response
+  const { id } = req.params; // id = req.params.id, id rename to _id
+  const { title, message, creator, selectedFile, tags } = req.body;
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+  const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
+
+  await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
+
+  res.json(updatedPost);
 }
