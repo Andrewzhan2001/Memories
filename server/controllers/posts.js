@@ -17,7 +17,8 @@ export const getPosts = async (req,res)=>{  // request and response
 
 export const createPost = async (req,res)=>{  // request and response
   const post = req.body;   //basic layout for making post
-  const newPost = new PostMessage(post);   // create new post
+  const newPost = new PostMessage({...post, createdAt : new Date().toLocaleString("en-US", {timeZone: "America/New_York"})});   // create new post
+  
   try {
     await newPost.save();
     
