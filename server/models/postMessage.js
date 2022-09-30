@@ -15,7 +15,7 @@ const postSchema = mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: new Date()
+    default: new Date().toLocaleString("en-US", {timeZone: "America/New_York"})
   },
 })
 

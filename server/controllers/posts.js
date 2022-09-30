@@ -2,7 +2,7 @@
 import PostMessage from "../models/postMessage.js";
 import express from 'express';
 import mongoose from 'mongoose';
-
+import moment from 'moment'
 //asynchronous means program will not wait the funtion finish to do the next step
 //funciton will do the rest until wait is done
 export const getPosts = async (req,res)=>{  // request and response
